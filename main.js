@@ -3421,19 +3421,19 @@ var GameTableMaskComponent = /** @class */ (function () {
                     }
                 }
                 : {
-                    name: '固定する',
+                    name: '固定',
                     action: function () {
                         _this.isLock = true;
                         _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_4__["SoundEffect"].play(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_4__["PresetSound"].lock);
                     }
                 }),
             service_context_menu_service__WEBPACK_IMPORTED_MODULE_7__["ContextMenuSeparator"],
-            { name: 'マップマスクを編集', action: function () { _this.showDetail(_this.gameTableMask); } },
+            { name: '編輯地圖迷霧', action: function () { _this.showDetail(_this.gameTableMask); } },
             {
-                name: 'コピーを作る',
+                name: '製作副本',
                 action: function () {
                     var cloneObject = _this.gameTableMask.clone();
-                    console.log('コピー', cloneObject);
+                    console.log('複製', cloneObject);
                     cloneObject.location.x += _this.gridSize;
                     cloneObject.location.y += _this.gridSize;
                     cloneObject.isLock = false;
@@ -3443,14 +3443,14 @@ var GameTableMaskComponent = /** @class */ (function () {
                 }
             },
             {
-                name: '削除する',
+                name: '刪除',
                 action: function () {
                     _this.gameTableMask.destroy();
                     _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_4__["SoundEffect"].play(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_4__["PresetSound"].sweep);
                 }
             },
             service_context_menu_service__WEBPACK_IMPORTED_MODULE_7__["ContextMenuSeparator"],
-            { name: 'オブジェクト作成', action: null, subActions: this.tabletopActionService.makeDefaultContextMenuActions(objectPosition) }
+            { name: '新增物件', action: null, subActions: this.tabletopActionService.makeDefaultContextMenuActions(objectPosition) }
         ], this.name);
     };
     GameTableMaskComponent.prototype.onMove = function () {
@@ -3465,7 +3465,7 @@ var GameTableMaskComponent = /** @class */ (function () {
     };
     GameTableMaskComponent.prototype.showDetail = function (gameObject) {
         var coordinate = this.pointerDeviceService.pointers[0];
-        var title = 'マップマスク設定';
+        var title = '設定地圖迷霧';
         if (gameObject.name.length)
             title += ' - ' + gameObject.name;
         var option = { title: title, left: coordinate.x - 200, top: coordinate.y - 150, width: 400, height: 300 };
@@ -3834,14 +3834,14 @@ var CardComponent = /** @class */ (function () {
         this.contextMenuService.open(position, [
             (!this.isVisible || this.isHand
                 ? {
-                    name: '表にする',
+                    name: '表面',
                     action: function () {
                         _this.card.faceUp();
                         _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_8__["SoundEffect"].play(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_8__["PresetSound"].cardDraw);
                     }
                 }
                 : {
-                    name: '裏にする',
+                    name: '背面',
                     action: function () {
                         _this.card.faceDown();
                         _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_8__["SoundEffect"].play(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_8__["PresetSound"].cardDraw);
@@ -3849,14 +3849,14 @@ var CardComponent = /** @class */ (function () {
                 }),
             (this.isHand
                 ? {
-                    name: '裏にする',
+                    name: '背面',
                     action: function () {
                         _this.card.faceDown();
                         _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_8__["SoundEffect"].play(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_8__["PresetSound"].cardDraw);
                     }
                 }
                 : {
-                    name: '自分だけ見る',
+                    name: '僅自己可見',
                     action: function () {
                         _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_8__["SoundEffect"].play(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_8__["PresetSound"].cardDraw);
                         _this.card.faceDown();
@@ -3865,16 +3865,16 @@ var CardComponent = /** @class */ (function () {
                 }),
             service_context_menu_service__WEBPACK_IMPORTED_MODULE_11__["ContextMenuSeparator"],
             {
-                name: '重なったカードで山札を作る',
+                name: '新增牌堆',
                 action: function () {
                     _this.createStack();
                     _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_8__["SoundEffect"].play(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_8__["PresetSound"].cardPut);
                 }
             },
             service_context_menu_service__WEBPACK_IMPORTED_MODULE_11__["ContextMenuSeparator"],
-            { name: 'カードを編集', action: function () { _this.showDetail(_this.card); } },
+            { name: '編輯卡牌', action: function () { _this.showDetail(_this.card); } },
             {
-                name: 'コピーを作る',
+                name: '複製',
                 action: function () {
                     var cloneObject = _this.card.clone();
                     cloneObject.location.x += _this.gridSize;
@@ -3884,13 +3884,13 @@ var CardComponent = /** @class */ (function () {
                 }
             },
             {
-                name: '削除する',
+                name: '刪除',
                 action: function () {
                     _this.card.destroy();
                     _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_8__["SoundEffect"].play(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_8__["PresetSound"].sweep);
                 }
             },
-        ], this.isVisible ? this.name : 'カード');
+        ], this.isVisible ? this.name : '卡牌ˊ');
     };
     CardComponent.prototype.onMove = function () {
         this.input.cancel();
@@ -3962,7 +3962,7 @@ var CardComponent = /** @class */ (function () {
     CardComponent.prototype.showDetail = function (gameObject) {
         _udonarium_core_system__WEBPACK_IMPORTED_MODULE_6__["EventSystem"].trigger('SELECT_TABLETOP_OBJECT', { identifier: gameObject.identifier, className: gameObject.aliasName });
         var coordinate = this.pointerDeviceService.pointers[0];
-        var title = 'カード設定';
+        var title = '卡牌設定';
         if (gameObject.name.length)
             title += ' - ' + gameObject.name;
         var option = { title: title, left: coordinate.x - 300, top: coordinate.y - 300, width: 600, height: 600 };
@@ -6235,7 +6235,7 @@ var TabletopActionService = /** @class */ (function () {
     function TabletopActionService() {
     }
     TabletopActionService.prototype.createGameCharacter = function (position) {
-        var character = _udonarium_game_character__WEBPACK_IMPORTED_MODULE_9__["GameCharacter"].create('新しいキャラクター', 1, '');
+        var character = _udonarium_game_character__WEBPACK_IMPORTED_MODULE_9__["GameCharacter"].create('新角色', 1, '');
         character.location.x = position.x - 25;
         character.location.y = position.y - 25;
         character.posZ = position.z;
@@ -6245,7 +6245,7 @@ var TabletopActionService = /** @class */ (function () {
         var viewTable = this.getViewTable();
         if (!viewTable)
             return;
-        var tableMask = _udonarium_game_table_mask__WEBPACK_IMPORTED_MODULE_11__["GameTableMask"].create('マップマスク', 5, 5, 100);
+        var tableMask = _udonarium_game_table_mask__WEBPACK_IMPORTED_MODULE_11__["GameTableMask"].create('地圖迷霧', 5, 5, 100);
         tableMask.location.x = position.x - 25;
         tableMask.location.y = position.y - 25;
         tableMask.posZ = position.z;
@@ -6273,7 +6273,7 @@ var TabletopActionService = /** @class */ (function () {
         return terrain;
     };
     TabletopActionService.prototype.createTextNote = function (position) {
-        var textNote = _udonarium_text_note__WEBPACK_IMPORTED_MODULE_15__["TextNote"].create('共有メモ', 'テキストを入力してください', 5, 4, 3);
+        var textNote = _udonarium_text_note__WEBPACK_IMPORTED_MODULE_15__["TextNote"].create('共有筆記', '請輸入內容', 5, 4, 3);
         textNote.location.x = position.x;
         textNote.location.y = position.y;
         textNote.posZ = position.z;
@@ -6297,7 +6297,7 @@ var TabletopActionService = /** @class */ (function () {
     };
     TabletopActionService.prototype.createTrump = function (position) {
         var e_1, _a, e_2, _b;
-        var cardStack = _udonarium_card_stack__WEBPACK_IMPORTED_MODULE_3__["CardStack"].create('トランプ山札');
+        var cardStack = _udonarium_card_stack__WEBPACK_IMPORTED_MODULE_3__["CardStack"].create('撲克牌');
         cardStack.location.x = position.x - 25;
         cardStack.location.y = position.y - 25;
         cardStack.posZ = position.z;
@@ -6308,7 +6308,7 @@ var TabletopActionService = /** @class */ (function () {
         //    }
         if (!_udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.get(back)) {
             var image = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(back);
-            _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(image.identifier).tag = 'トランプ';
+            _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(image.identifier).tag = '卡牌';
         }
         //
         var suits = ['c', 'd', 'h', 's'];
@@ -6338,10 +6338,10 @@ var TabletopActionService = /** @class */ (function () {
                     //本家PR #92より
                     //          ImageStorage.instance.add(url);
                     var image = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(url);
-                    _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(image.identifier).tag = 'トランプ';
+                    _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(image.identifier).tag = '卡牌';
                     //
                 }
-                var card = _udonarium_card__WEBPACK_IMPORTED_MODULE_2__["Card"].create('カード', url, back);
+                var card = _udonarium_card__WEBPACK_IMPORTED_MODULE_2__["Card"].create('卡牌', url, back);
                 cardStack.putOnBottom(card);
             }
         }
@@ -6368,7 +6368,7 @@ var TabletopActionService = /** @class */ (function () {
         //entyu_2 #92
         //ImageTag.create(testBgFile.identifier).tag = 'default テーブル';
         //
-        gameTable.name = '最初のテーブル';
+        gameTable.name = '原始桌面';
         gameTable.imageIdentifier = testBgFile.identifier;
         gameTable.width = 20;
         gameTable.height = 15;
@@ -6402,139 +6402,139 @@ var TabletopActionService = /** @class */ (function () {
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d4_dice[00]').toContext();
         fileContext.url = './assets/images/april_dice/1d4_dice[00].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d4_dice[01]').toContext();
         fileContext.url = './assets/images/april_dice/1d4_dice[01].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d4_dice[02]').toContext();
         fileContext.url = './assets/images/april_dice/1d4_dice[02].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d4_dice[03]').toContext();
         fileContext.url = './assets/images/april_dice/1d4_dice[03].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d6_dice[00]').toContext();
         fileContext.url = './assets/images/april_dice/1d6_dice[00].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d6_dice[01]').toContext();
         fileContext.url = './assets/images/april_dice/1d6_dice[01].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d6_dice[02]').toContext();
         fileContext.url = './assets/images/april_dice/1d6_dice[02].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d6_dice[03]').toContext();
         fileContext.url = './assets/images/april_dice/1d6_dice[03].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('2d6_dice[00]').toContext();
         fileContext.url = './assets/images/april_dice/2d6_dice[00].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('2d6_dice[01]').toContext();
         fileContext.url = './assets/images/april_dice/2d6_dice[01].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('2d6_dice[02]').toContext();
         fileContext.url = './assets/images/april_dice/2d6_dice[02].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('2d6_dice[03]').toContext();
         fileContext.url = './assets/images/april_dice/2d6_dice[03].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d8_dice[00]').toContext();
         fileContext.url = './assets/images/april_dice/1d8_dice[00].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d8_dice[01]').toContext();
         fileContext.url = './assets/images/april_dice/1d8_dice[01].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d8_dice[02]').toContext();
         fileContext.url = './assets/images/april_dice/1d8_dice[02].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d8_dice[03]').toContext();
         fileContext.url = './assets/images/april_dice/1d8_dice[03].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d10_dice[00]').toContext();
         fileContext.url = './assets/images/april_dice/1d10_dice[00].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d10_dice[01]').toContext();
         fileContext.url = './assets/images/april_dice/1d10_dice[01].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d10_dice[02]').toContext();
         fileContext.url = './assets/images/april_dice/1d10_dice[02].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d10_dice[03]').toContext();
         fileContext.url = './assets/images/april_dice/1d10_dice[03].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d12_dice[00]').toContext();
         fileContext.url = './assets/images/april_dice/1d12_dice[00].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d12_dice[01]').toContext();
         fileContext.url = './assets/images/april_dice/1d12_dice[01].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d12_dice[02]').toContext();
         fileContext.url = './assets/images/april_dice/1d12_dice[02].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d12_dice[03]').toContext();
         fileContext.url = './assets/images/april_dice/1d12_dice[03].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d20_dice[00]').toContext();
         fileContext.url = './assets/images/april_dice/1d20_dice[00].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d20_dice[01]').toContext();
         fileContext.url = './assets/images/april_dice/1d20_dice[01].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d20_dice[02]').toContext();
         fileContext.url = './assets/images/april_dice/1d20_dice[02].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d20_dice[03]').toContext();
         fileContext.url = './assets/images/april_dice/1d20_dice[03].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d100_dice[00]').toContext();
         fileContext.url = './assets/images/april_dice/1d100_dice[00].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d100_dice[01]').toContext();
         fileContext.url = './assets/images/april_dice/1d100_dice[01].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d100_dice[02]').toContext();
         fileContext.url = './assets/images/april_dice/1d100_dice[02].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('1d100_dice[03]').toContext();
         fileContext.url = './assets/images/april_dice/1d100_dice[03].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('april[00]').toContext();
         fileContext.url = './assets/images/april/april[00].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('april[01]').toContext();
         fileContext.url = './assets/images/april/april[01].png';
         file = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = 'システム予約';
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(file.identifier).tag = '系統預約';
     };
     TabletopActionService.prototype.makeDefaultTabletopObjects = function () {
         var testCharacter = null;
@@ -6548,15 +6548,15 @@ var TabletopActionService = /** @class */ (function () {
         testCharacter.location.x = 5 * 50;
         testCharacter.location.y = 9 * 50;
         testCharacter.initialize();
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(testFile.identifier).tag = 'モンスター'; //本家PR #92より
-        testCharacter.createTestGameDataElement('モンスターA', 1, testFile.identifier);
-        this.addBuffRound(testCharacter, 'テストバフ1', '防+1', 3);
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(testFile.identifier).tag = '怪物'; //本家PR #92より
+        testCharacter.createTestGameDataElement('怪物A', 1, testFile.identifier);
+        this.addBuffRound(testCharacter, '測試BUFF 1', '防+1', 3);
         //-------------------------
         testCharacter = new _udonarium_game_character__WEBPACK_IMPORTED_MODULE_9__["GameCharacter"]('testCharacter_2');
         testCharacter.location.x = 8 * 50;
         testCharacter.location.y = 8 * 50;
         testCharacter.initialize();
-        testCharacter.createTestGameDataElement('モンスターB', 1, testFile.identifier);
+        testCharacter.createTestGameDataElement('怪物B', 1, testFile.identifier);
         //-------------------------
         testCharacter = new _udonarium_game_character__WEBPACK_IMPORTED_MODULE_9__["GameCharacter"]('testCharacter_3');
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('testCharacter_3_image').toContext();
@@ -6566,8 +6566,8 @@ var TabletopActionService = /** @class */ (function () {
         testCharacter.location.y = 2 * 50;
         testCharacter.initialize();
         testFile = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_5__["ImageStorage"].instance.add(fileContext);
-        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(testFile.identifier).tag = 'モンスター'; //本家PR #92より
-        testCharacter.createTestGameDataElement('モンスターC', 3, testFile.identifier);
+        _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_16__["ImageTag"].create(testFile.identifier).tag = '怪物'; //本家PR #92より
+        testCharacter.createTestGameDataElement('怪物C', 3, testFile.identifier);
         //-------------------------
         testCharacter = new _udonarium_game_character__WEBPACK_IMPORTED_MODULE_9__["GameCharacter"]('testCharacter_4');
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('testCharacter_4_image').toContext();
@@ -6579,8 +6579,8 @@ var TabletopActionService = /** @class */ (function () {
         testCharacter.location.x = 6 * 50;
         testCharacter.location.y = 11 * 50;
         testCharacter.initialize();
-        testCharacter.createTestGameDataElement('キャラクターA', 1, testFile.identifier);
-        this.addBuffRound(testCharacter, 'テストバフ2', '攻撃+10', 1);
+        testCharacter.createTestGameDataElement('角色A', 1, testFile.identifier);
+        this.addBuffRound(testCharacter, '測試BUFF 2', '攻撃+10', 1);
         //-------------------------
         testCharacter = new _udonarium_game_character__WEBPACK_IMPORTED_MODULE_9__["GameCharacter"]('testCharacter_5');
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('testCharacter_5_image').toContext();
@@ -6589,8 +6589,8 @@ var TabletopActionService = /** @class */ (function () {
         testCharacter.location.x = 12 * 50;
         testCharacter.location.y = 12 * 50;
         testCharacter.initialize();
-        testCharacter.createTestGameDataElement('キャラクターB', 1, testFile.identifier);
-        this.addBuffRound(testCharacter, 'テストバフ2', '攻撃+10', 1);
+        testCharacter.createTestGameDataElement('角色B', 1, testFile.identifier);
+        this.addBuffRound(testCharacter, '測試BUFF 2', '攻撃+10', 1);
         //-------------------------
         testCharacter = new _udonarium_game_character__WEBPACK_IMPORTED_MODULE_9__["GameCharacter"]('testCharacter_6');
         fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_4__["ImageFile"].createEmpty('testCharacter_6_image').toContext();
@@ -6600,8 +6600,8 @@ var TabletopActionService = /** @class */ (function () {
         testCharacter.initialize();
         testCharacter.location.x = 5 * 50;
         testCharacter.location.y = 13 * 50;
-        testCharacter.createTestGameDataElement('キャラクターC', 1, testFile.identifier);
-        this.addBuffRound(testCharacter, 'テストバフ3', '回避+5', 1);
+        testCharacter.createTestGameDataElement('角色C', 1, testFile.identifier);
+        this.addBuffRound(testCharacter, '測試BUFF 3', '回避+5', 1);
     };
     TabletopActionService.prototype.makeDefaultContextMenuActions = function (position) {
         return [
@@ -6616,7 +6616,7 @@ var TabletopActionService = /** @class */ (function () {
     TabletopActionService.prototype.getCreateCharacterMenu = function (position) {
         var _this = this;
         return {
-            name: 'キャラクターを作成',
+            name: '創建角色',
             action: function () {
                 var character = _this.createGameCharacter(position);
                 _udonarium_core_system__WEBPACK_IMPORTED_MODULE_7__["EventSystem"].trigger('SELECT_TABLETOP_OBJECT', { identifier: character.identifier, className: character.aliasName });
@@ -6627,7 +6627,7 @@ var TabletopActionService = /** @class */ (function () {
     TabletopActionService.prototype.getCreateTableMaskMenu = function (position) {
         var _this = this;
         return {
-            name: 'マップマスクを作成',
+            name: '新增地圖迷霧',
             action: function () {
                 _this.createGameTableMask(position);
                 _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_12__["SoundEffect"].play(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_12__["PresetSound"].cardPut);
@@ -6637,7 +6637,7 @@ var TabletopActionService = /** @class */ (function () {
     TabletopActionService.prototype.getCreateTerrainMenu = function (position) {
         var _this = this;
         return {
-            name: '地形を作成',
+            name: '新增地形',
             action: function () {
                 _this.createTerrain(position);
                 _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_12__["SoundEffect"].play(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_12__["PresetSound"].blockPut);
@@ -6647,7 +6647,7 @@ var TabletopActionService = /** @class */ (function () {
     TabletopActionService.prototype.getCreateTextNoteMenu = function (position) {
         var _this = this;
         return {
-            name: '共有メモを作成',
+            name: '新增共有筆記',
             action: function () {
                 _this.createTextNote(position);
                 _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_12__["SoundEffect"].play(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_12__["PresetSound"].cardPut);
@@ -6657,7 +6657,7 @@ var TabletopActionService = /** @class */ (function () {
     TabletopActionService.prototype.getCreateTrumpMenu = function (position) {
         var _this = this;
         return {
-            name: 'トランプの山札を作成',
+            name: '新增牌堆',
             action: function () {
                 _this.createTrump(position);
                 _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_12__["SoundEffect"].play(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_12__["PresetSound"].cardPut);
@@ -6685,7 +6685,7 @@ var TabletopActionService = /** @class */ (function () {
                 }
             });
         });
-        return { name: 'ダイスを作成', action: null, subActions: subMenus };
+        return { name: '新增骰子', action: null, subActions: subMenus };
     };
     TabletopActionService.prototype.getViewTable = function () {
         var tableSelecter = _udonarium_core_synchronize_object_object_store__WEBPACK_IMPORTED_MODULE_6__["ObjectStore"].instance.get('tableSelecter');
@@ -8400,7 +8400,7 @@ var ModalService = /** @class */ (function () {
         this.componentFactoryResolver = componentFactoryResolver;
         this.modalContext = null;
         this.count = 0;
-        this.title = '無名のモーダル';
+        this.title = '無名的模組';
     }
     Object.defineProperty(ModalService.prototype, "option", {
         get: function () {
@@ -10343,7 +10343,7 @@ var FileSelecterComponent = /** @class */ (function () {
                 var tag = '';
                 if (_udonarium_image_tag__WEBPACK_IMPORTED_MODULE_5__["ImageTag"].get(identifier))
                     tag = _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_5__["ImageTag"].get(identifier).tag;
-                if (tag != 'システム予約') //システム予約名を非表示
+                if (tag != '系統預約') //システム予約名を非表示
                     imageFileList.push(imageFile);
             }
         }
@@ -10361,7 +10361,7 @@ var FileSelecterComponent = /** @class */ (function () {
         get: function () {
             var e_2, _a;
             var imageFileList = [];
-            if (this.selectTag == '全て')
+            if (this.selectTag == '全部')
                 return this.getAllImage();
             try {
                 for (var _b = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(this.fileStorageService.images), _c = _b.next(); !_c.done; _c = _b.next()) {
@@ -10418,7 +10418,7 @@ var FileSelecterComponent = /** @class */ (function () {
                     var imageTag = _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_5__["ImageTag"].get(identifier);
                     if (imageTag) {
                         if (imageTag.tag) {
-                            if (imageTag.tag != 'システム予約') //システム予約名を非表示
+                            if (imageTag.tag != '系統預約') //システム予約名を非表示
                                 tags.push(imageTag.tag);
                         }
                     }
@@ -10432,7 +10432,7 @@ var FileSelecterComponent = /** @class */ (function () {
                 finally { if (e_3) throw e_3.error; }
             }
             var tags2 = Array.from(new Set(tags));
-            tags2.unshift('全て');
+            tags2.unshift('全部');
             tags2.unshift('');
             return tags2;
         },
@@ -10463,7 +10463,7 @@ var FileSelecterComponent = /** @class */ (function () {
     });
     FileSelecterComponent.prototype.ngOnInit = function () {
         var _this = this;
-        Promise.resolve().then(function () { return _this.modalService.title = _this.panelService.title = 'ファイル一覧'; });
+        Promise.resolve().then(function () { return _this.modalService.title = _this.panelService.title = '檔案一覽'; });
     };
     FileSelecterComponent.prototype.ngAfterViewInit = function () {
         var _this = this;
@@ -10853,7 +10853,7 @@ var DiceSymbolComponent = /** @class */ (function () {
         var actions = [];
         if (this.isVisible) {
             actions.push({
-                name: 'ダイスを振る',
+                name: '擲骰',
                 action: function () {
                     _this.diceRoll();
                 }
@@ -10862,7 +10862,7 @@ var DiceSymbolComponent = /** @class */ (function () {
         actions.push(service_context_menu_service__WEBPACK_IMPORTED_MODULE_10__["ContextMenuSeparator"]);
         if (this.isMine || this.hasOwner) {
             actions.push({
-                name: 'ダイスを公開',
+                name: '公開骰子',
                 action: function () {
                     _this.owner = '';
                     _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_7__["SoundEffect"].play(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_7__["PresetSound"].unlock);
@@ -10871,7 +10871,7 @@ var DiceSymbolComponent = /** @class */ (function () {
         }
         if (!this.isMine) {
             actions.push({
-                name: '自分だけ見る',
+                name: '僅自己可見',
                 action: function () {
                     _this.owner = _udonarium_core_system__WEBPACK_IMPORTED_MODULE_5__["Network"].peerContext.userId;
                     _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_7__["SoundEffect"].play(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_7__["PresetSound"].lock);
@@ -10888,12 +10888,12 @@ var DiceSymbolComponent = /** @class */ (function () {
                     }
                 });
             });
-            actions.push({ name: "\u30C0\u30A4\u30B9\u76EE\u3092\u8A2D\u5B9A", action: null, subActions: subActions_1 });
+            actions.push({ name: "\u8A2D\u5B9A\u9AB0\u5B50", action: null, subActions: subActions_1 });
         }
         actions.push(service_context_menu_service__WEBPACK_IMPORTED_MODULE_10__["ContextMenuSeparator"]);
-        actions.push({ name: '詳細を表示', action: function () { _this.showDetail(_this.diceSymbol); } });
+        actions.push({ name: '顯示詳細', action: function () { _this.showDetail(_this.diceSymbol); } });
         actions.push({
-            name: 'コピーを作る',
+            name: '製作副本',
             action: function () {
                 var cloneObject = _this.diceSymbol.clone();
                 cloneObject.location.x += _this.gridSize;
@@ -10903,7 +10903,7 @@ var DiceSymbolComponent = /** @class */ (function () {
             }
         });
         actions.push({
-            name: '削除する',
+            name: '刪除',
             action: function () {
                 _this.diceSymbol.destroy();
                 _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_7__["SoundEffect"].play(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_7__["PresetSound"].sweep);
@@ -10925,7 +10925,7 @@ var DiceSymbolComponent = /** @class */ (function () {
     DiceSymbolComponent.prototype.showDetail = function (gameObject) {
         _udonarium_core_system__WEBPACK_IMPORTED_MODULE_5__["EventSystem"].trigger('SELECT_TABLETOP_OBJECT', { identifier: gameObject.identifier, className: gameObject.aliasName });
         var coordinate = this.pointerDeviceService.pointers[0];
-        var title = 'ダイスシンボル設定';
+        var title = '設定骰子符號';
         if (gameObject.name.length)
             title += ' - ' + gameObject.name;
         var option = { title: title, left: coordinate.x - 300, top: coordinate.y - 300, width: 600, height: 600 };
@@ -16110,7 +16110,7 @@ __webpack_require__.r(__webpack_exports__);
 var PanelService = /** @class */ (function () {
     function PanelService(componentFactoryResolver) {
         this.componentFactoryResolver = componentFactoryResolver;
-        this.title = '無名のパネル';
+        this.title = '無名的面板';
         this.left = 0;
         this.top = 0;
         this.width = 100;
@@ -16808,7 +16808,7 @@ function CutInBgmComponent_div_1_button_3_Template(rf, ctx) { if (rf & 1) {
     var _r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 5);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function CutInBgmComponent_div_1_button_3_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r8); var audio_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit; var ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r6.play(audio_r2); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "\u8A66\u8074/\u518D\u751F");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "\u8A66\u8074/\u64AD\u653E");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
     var audio_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
@@ -16857,7 +16857,7 @@ function CutInBgmComponent_div_1_Template(rf, ctx) { if (rf & 1) {
 } }
 function CutInBgmComponent_div_2_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "\u97F3\u697D\u304C\u30A2\u30C3\u30D7\u30ED\u30FC\u30C9\u3055\u308C\u3066\u3044\u307E\u305B\u3093\u3002");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "\u97F3\u6A02\u5C1A\u672A\u4E0A\u50B3\u3002");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
 var CutInBgmComponent = /** @class */ (function () {
@@ -16892,7 +16892,7 @@ var CutInBgmComponent = /** @class */ (function () {
     });
     CutInBgmComponent.prototype.ngOnInit = function () {
         var _this = this;
-        Promise.resolve().then(function () { return _this.modalService.title = _this.panelService.title = 'カットインBGM選択'; });
+        Promise.resolve().then(function () { return _this.modalService.title = _this.panelService.title = '選擇CutIn BGM'; });
         this.auditionPlayer.volumeType = _udonarium_core_file_storage_audio_player__WEBPACK_IMPORTED_MODULE_1__["VolumeType"].AUDITION;
         _udonarium_core_system__WEBPACK_IMPORTED_MODULE_5__["EventSystem"].register(this)
             .on('*', function (event) {
@@ -17232,7 +17232,7 @@ var DiceTableSettingComponent = /** @class */ (function () {
     });
     DiceTableSettingComponent.prototype.ngOnInit = function () {
         var _this = this;
-        Promise.resolve().then(function () { return _this.modalService.title = _this.panelService.title = 'ダイス表設定'; });
+        Promise.resolve().then(function () { return _this.modalService.title = _this.panelService.title = '骰子表設定'; });
     };
     DiceTableSettingComponent.prototype.ngAfterViewInit = function () { };
     DiceTableSettingComponent.prototype.ngOnDestroy = function () {
@@ -17567,7 +17567,7 @@ var FileStorageComponent = /** @class */ (function () {
                 var tag = '';
                 if (_udonarium_image_tag__WEBPACK_IMPORTED_MODULE_5__["ImageTag"].get(identifier))
                     tag = _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_5__["ImageTag"].get(identifier).tag;
-                if (tag != 'システム予約') //システム予約名を非表示
+                if (tag != '系統預約') //システム予約名を非表示
                     imageFileList.push(imageFile);
             }
         }
@@ -17584,7 +17584,7 @@ var FileStorageComponent = /** @class */ (function () {
         get: function () {
             var e_2, _a;
             var imageFileList = [];
-            if (this.selectTag == '全て')
+            if (this.selectTag == '全部')
                 return this.getAllImage();
             try {
                 for (var _b = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(this.fileStorageService.images), _c = _b.next(); !_c.done; _c = _b.next()) {
@@ -17641,7 +17641,7 @@ var FileStorageComponent = /** @class */ (function () {
                     var imageTag = _udonarium_image_tag__WEBPACK_IMPORTED_MODULE_5__["ImageTag"].get(identifier);
                     if (imageTag) {
                         if (imageTag.tag) {
-                            if (imageTag.tag != 'システム予約') //システム予約名を非表示
+                            if (imageTag.tag != '系統預約') //システム予約名を非表示
                                 tags.push(imageTag.tag);
                         }
                     }
@@ -17655,7 +17655,7 @@ var FileStorageComponent = /** @class */ (function () {
                 finally { if (e_3) throw e_3.error; }
             }
             var tags2 = Array.from(new Set(tags));
-            tags2.unshift('全て');
+            tags2.unshift('全部');
             tags2.unshift('');
             return tags2;
         },
@@ -17667,9 +17667,9 @@ var FileStorageComponent = /** @class */ (function () {
     };
     FileStorageComponent.prototype.changeTag = function () {
         var e_4, _a;
-        if (this.newTagName == '全て')
+        if (this.newTagName == '全部')
             return; //表示上混乱するタグの禁止
-        if (this.newTagName == 'システム予約')
+        if (this.newTagName == '系統預約')
             return; //システム予約名称
         var changeableImages = this.images;
         console.log("this.newTagName" + this.newTagName);
@@ -17705,7 +17705,7 @@ var FileStorageComponent = /** @class */ (function () {
     };
     FileStorageComponent.prototype.ngOnInit = function () {
         var _this = this;
-        Promise.resolve().then(function () { return _this.panelService.title = 'ファイル一覧'; });
+        Promise.resolve().then(function () { return _this.panelService.title = '檔案一覽'; });
     };
     FileStorageComponent.prototype.ngAfterViewInit = function () {
         var _this = this;
@@ -18874,7 +18874,7 @@ var GameObjectInventoryComponent = /** @class */ (function () {
     });
     GameObjectInventoryComponent.prototype.ngOnInit = function () {
         var _this = this;
-        Promise.resolve().then(function () { return _this.panelService.title = 'インベントリ'; });
+        Promise.resolve().then(function () { return _this.panelService.title = '清單'; });
         _udonarium_core_system__WEBPACK_IMPORTED_MODULE_3__["EventSystem"].register(this)
             .on('SELECT_TABLETOP_OBJECT', -1000, function (event) {
             if (_udonarium_core_synchronize_object_object_store__WEBPACK_IMPORTED_MODULE_2__["ObjectStore"].instance.get(event.data.identifier) instanceof _udonarium_tabletop_object__WEBPACK_IMPORTED_MODULE_6__["TabletopObject"]) {
@@ -18912,7 +18912,7 @@ var GameObjectInventoryComponent = /** @class */ (function () {
     GameObjectInventoryComponent.prototype.getTabTitle = function (inventoryType) {
         switch (inventoryType) {
             case 'table':
-                return 'テーブル';
+                return '桌面';
             case _udonarium_core_system__WEBPACK_IMPORTED_MODULE_3__["Network"].peerId:
                 return '個人';
             case 'graveyard':
@@ -18974,17 +18974,17 @@ var GameObjectInventoryComponent = /** @class */ (function () {
         this.selectGameObject(gameObject);
         var position = this.pointerDeviceService.pointers[0];
         var actions = [];
-        actions.push({ name: '詳細を表示', action: function () { _this.showDetail(gameObject); } });
+        actions.push({ name: '顯示詳細', action: function () { _this.showDetail(gameObject); } });
         if (gameObject.location.name !== 'graveyard') {
-            actions.push({ name: 'チャットパレットを表示', action: function () { _this.showChatPalette(gameObject); } });
-            actions.push({ name: 'リモコンを表示', action: function () { _this.showRemoteController(gameObject); } });
+            actions.push({ name: '顯示對話組合板', action: function () { _this.showChatPalette(gameObject); } });
+            actions.push({ name: '顯示控制板', action: function () { _this.showRemoteController(gameObject); } });
         }
         actions.push(service_context_menu_service__WEBPACK_IMPORTED_MODULE_9__["ContextMenuSeparator"]);
         var locations = [
-            { name: 'table', alias: 'テーブルに移動' },
-            { name: 'common', alias: '共有イベントリに移動' },
-            { name: _udonarium_core_system__WEBPACK_IMPORTED_MODULE_3__["Network"].peerId, alias: '個人イベントリに移動' },
-            { name: 'graveyard', alias: '墓場に移動' }
+            { name: 'table', alias: '移動至桌面' },
+            { name: 'common', alias: '移動至共有倉庫' },
+            { name: _udonarium_core_system__WEBPACK_IMPORTED_MODULE_3__["Network"].peerId, alias: '移動至個人倉庫' },
+            { name: 'graveyard', alias: '移動至墓場' }
         ];
         var _loop_1 = function (location_1) {
             if (gameObject.location.name === location_1.name)
@@ -19012,7 +19012,7 @@ var GameObjectInventoryComponent = /** @class */ (function () {
         }
         if (gameObject.location.name === 'graveyard') {
             actions.push({
-                name: '削除する',
+                name: '刪除',
                 action: function () {
                     _this.deleteGameObject(gameObject);
                     _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_5__["SoundEffect"].play(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_5__["PresetSound"].sweep);
@@ -19021,7 +19021,7 @@ var GameObjectInventoryComponent = /** @class */ (function () {
         }
         actions.push(service_context_menu_service__WEBPACK_IMPORTED_MODULE_9__["ContextMenuSeparator"]);
         actions.push({
-            name: 'コピーを作る',
+            name: '製作副本',
             action: function () {
                 _this.cloneGameObject(gameObject);
                 _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_5__["SoundEffect"].play(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_5__["PresetSound"].piecePut);
@@ -19036,7 +19036,7 @@ var GameObjectInventoryComponent = /** @class */ (function () {
         var e_3, _a;
         var tabTitle = this.getTabTitle(this.selectTab);
         var gameObjects = this.getGameObjects(this.selectTab);
-        if (!confirm(tabTitle + "\u306B\u5B58\u5728\u3059\u308B" + gameObjects.length + "\u500B\u306E\u8981\u7D20\u3092\u5B8C\u5168\u306B\u524A\u9664\u3057\u307E\u3059\u304B\uFF1F"))
+        if (!confirm(tabTitle + "\u5B58\u5728\u7684" + gameObjects.length + "\u500B\u6A94\u6848\u8981\u6C38\u4E45\u522A\u9664\u55CE\uFF1F"))
             return;
         try {
             for (var gameObjects_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(gameObjects), gameObjects_1_1 = gameObjects_1.next(); !gameObjects_1_1.done; gameObjects_1_1 = gameObjects_1.next()) {
@@ -19059,7 +19059,7 @@ var GameObjectInventoryComponent = /** @class */ (function () {
     GameObjectInventoryComponent.prototype.showDetail = function (gameObject) {
         _udonarium_core_system__WEBPACK_IMPORTED_MODULE_3__["EventSystem"].trigger('SELECT_TABLETOP_OBJECT', { identifier: gameObject.identifier, className: gameObject.aliasName });
         var coordinate = this.pointerDeviceService.pointers[0];
-        var title = 'キャラクターシート';
+        var title = '角色卡';
         if (gameObject.name.length)
             title += ' - ' + gameObject.name;
         var option = { title: title, left: coordinate.x - 800, top: coordinate.y - 300, width: 800, height: 600 };
@@ -20794,8 +20794,8 @@ var AppComponent = /** @class */ (function () {
         cutInLauncher.initialize();
         var soundEffect = new _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_19__["SoundEffect"]('SoundEffect');
         soundEffect.initialize();
-        _udonarium_chat_tab_list__WEBPACK_IMPORTED_MODULE_2__["ChatTabList"].instance.addChatTab('メインタブ', 'MainTab');
-        _udonarium_chat_tab_list__WEBPACK_IMPORTED_MODULE_2__["ChatTabList"].instance.addChatTab('サブタブ', 'SubTab');
+        _udonarium_chat_tab_list__WEBPACK_IMPORTED_MODULE_2__["ChatTabList"].instance.addChatTab('主要分頁', 'MainTab');
+        _udonarium_chat_tab_list__WEBPACK_IMPORTED_MODULE_2__["ChatTabList"].instance.addChatTab('閒聊分頁', 'SubTab');
         var fileContext = _udonarium_core_file_storage_image_file__WEBPACK_IMPORTED_MODULE_7__["ImageFile"].createEmpty('none_icon').toContext();
         fileContext.url = './assets/images/ic_account_circle_black_24dp_2x.png';
         var noneIconImage = _udonarium_core_file_storage_image_storage__WEBPACK_IMPORTED_MODULE_9__["ImageStorage"].instance.add(fileContext);
@@ -20831,7 +20831,7 @@ var AppComponent = /** @class */ (function () {
         _udonarium_core_file_storage_audio_storage__WEBPACK_IMPORTED_MODULE_5__["AudioStorage"].instance.get(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_19__["PresetSound"].unlock).isHidden = true;
         _udonarium_core_file_storage_audio_storage__WEBPACK_IMPORTED_MODULE_5__["AudioStorage"].instance.get(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_19__["PresetSound"].sweep).isHidden = true;
         _udonarium_peer_cursor__WEBPACK_IMPORTED_MODULE_18__["PeerCursor"].createMyCursor();
-        _udonarium_peer_cursor__WEBPACK_IMPORTED_MODULE_18__["PeerCursor"].myCursor.name = 'プレイヤー';
+        _udonarium_peer_cursor__WEBPACK_IMPORTED_MODULE_18__["PeerCursor"].myCursor.name = '玩家';
         _udonarium_peer_cursor__WEBPACK_IMPORTED_MODULE_18__["PeerCursor"].myCursor.imageIdentifier = noneIconImage.identifier;
         _udonarium_core_system__WEBPACK_IMPORTED_MODULE_14__["EventSystem"].register(this)
             .on('START_CUT_IN', function (event) {
@@ -20840,7 +20840,7 @@ var AppComponent = /** @class */ (function () {
             .on('STOP_CUT_IN', function (event) {
             if (!event.data.cutIn)
                 return;
-            console.log('カットインイベント_ストップ' + event.data.cutIn.name);
+            console.log('CutIn事件_停止' + event.data.cutIn.name);
         })
             .on('UPDATE_GAME_OBJECT', function (event) { _this.lazyNgZoneUpdate(event.isSendFromSelf); })
             .on('DELETE_GAME_OBJECT', function (event) { _this.lazyNgZoneUpdate(event.isSendFromSelf); })
@@ -20868,11 +20868,11 @@ var AppComponent = /** @class */ (function () {
                     switch (_a.label) {
                         case 0:
                             if (!(1 < _udonarium_core_system__WEBPACK_IMPORTED_MODULE_14__["Network"].peerIds.length)) return [3 /*break*/, 2];
-                            return [4 /*yield*/, this.modalService.open(component_text_view_text_view_component__WEBPACK_IMPORTED_MODULE_31__["TextViewComponent"], { title: 'ネットワークエラー', text: 'ネットワーク接続に何らかの異常が発生しました。\nこの表示以後、接続が不安定であれば、ページリロードと再接続を試みてください。' })];
+                            return [4 /*yield*/, this.modalService.open(component_text_view_text_view_component__WEBPACK_IMPORTED_MODULE_31__["TextViewComponent"], { title: '網絡錯誤', text: '網絡連線發生錯誤。\n如果顯示後連接繼續不穩定，請嘗試重新加載頁面並重新連接。' })];
                         case 1:
                             _a.sent();
                             return [3 /*break*/, 4];
-                        case 2: return [4 /*yield*/, this.modalService.open(component_text_view_text_view_component__WEBPACK_IMPORTED_MODULE_31__["TextViewComponent"], { title: 'ネットワークエラー', text: '接続情報が破棄されました。\nこのウィンドウを閉じると再接続を試みます。' })];
+                        case 2: return [4 /*yield*/, this.modalService.open(component_text_view_text_view_component__WEBPACK_IMPORTED_MODULE_31__["TextViewComponent"], { title: '網絡錯誤', text: '連線情報已損壞。\n關閉此頁面，然後嘗試重新連接。' })];
                         case 3:
                             _a.sent();
                             _udonarium_core_system__WEBPACK_IMPORTED_MODULE_14__["Network"].open();
@@ -20910,13 +20910,13 @@ var AppComponent = /** @class */ (function () {
     AppComponent.prototype.startCutIn = function (cutIn) {
         if (!cutIn)
             return;
-        console.log('カットインイベント_スタート' + cutIn.name);
+        console.log('CutIn事件_播放' + cutIn.name);
         var option = { width: 200, height: 100, left: 300, top: 100 };
-        option.title = 'カットイン : ' + cutIn.name;
+        option.title = 'CutIn : ' + cutIn.name;
         console.log('画面領域 w:' + window.innerWidth + ' h:' + window.innerHeight);
         var cutin_w = cutIn.width;
         var cutin_h = cutIn.height;
-        console.log('画像サイズ w:' + cutin_w + ' h:' + cutin_h);
+        console.log('画像尺寸 w:' + cutin_w + ' h:' + cutin_h);
         var margin_w = window.innerWidth - cutin_w;
         var margin_h = window.innerHeight - cutin_h - 25;
         if (margin_w < 0)
@@ -20987,7 +20987,7 @@ var AppComponent = /** @class */ (function () {
                         this.progresPercent = 0;
                         roomName = _udonarium_core_system__WEBPACK_IMPORTED_MODULE_14__["Network"].peerContext && 0 < _udonarium_core_system__WEBPACK_IMPORTED_MODULE_14__["Network"].peerContext.roomName.length
                             ? _udonarium_core_system__WEBPACK_IMPORTED_MODULE_14__["Network"].peerContext.roomName
-                            : 'ルームデータ';
+                            : '房間數據';
                         return [4 /*yield*/, this.saveDataService.saveRoomAsync(roomName, function (percent) {
                                 _this.progresPercent = percent;
                             })];
@@ -21153,7 +21153,7 @@ var AppComponent = /** @class */ (function () {
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](60, "network-indicator", 10);
         } if (rf & 2) {
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
-            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("top", 0)("left", 0)("width", 105)("height", 475)("title", "\u30E1\u30CB\u30E5\u30FC");
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("top", 0)("left", 0)("width", 105)("height", 475)("title", "MENU");
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](54);
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", !ctx.isSaveing);
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
@@ -22222,12 +22222,12 @@ var SaveDataService = /** @class */ (function () {
     }
     SaveDataService.prototype.saveRoomAsync = function (fileName, updateCallback) {
         var _this = this;
-        if (fileName === void 0) { fileName = 'ルームデータ'; }
+        if (fileName === void 0) { fileName = '房間數據'; }
         return SaveDataService.queue.add(function (resolve, reject) { return resolve(_this._saveRoomAsync(fileName, updateCallback)); });
     };
     SaveDataService.prototype._saveRoomAsync = function (fileName, updateCallback) {
         var e_1, _a;
-        if (fileName === void 0) { fileName = 'ルームデータ'; }
+        if (fileName === void 0) { fileName = '房間數據'; }
         var files = [];
         var roomXml = this.convertToXml(new _udonarium_room__WEBPACK_IMPORTED_MODULE_10__["Room"]());
         var chatXml = this.convertToXml(_udonarium_chat_tab_list__WEBPACK_IMPORTED_MODULE_2__["ChatTabList"].instance);
@@ -24413,7 +24413,7 @@ var ChatTachieComponent = /** @class */ (function () {
     };
     ChatTachieComponent.prototype.shoeMessageSetting = function () {
         var coordinate = this.pointerDeviceService.pointers[0];
-        var title = 'チャット詳細設定';
+        var title = '聊天室詳細設定';
         var option = { title: title, left: coordinate.x + 50, top: coordinate.y - 200, width: 340, height: 220 };
         var component = this.panelService.open(component_chat_message_setting_chat_message_setting_component__WEBPACK_IMPORTED_MODULE_3__["ChatMessageSettingComponent"], option);
     };
@@ -26484,7 +26484,7 @@ var ControllerInputComponent = /** @class */ (function () {
         } if (rf & 2) {
             var _t = void 0;
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵloadQuery"]()) && (ctx.textAreaElementRef = _t.first);
-        } }, inputs: { onlyCharacters: "onlyCharacters", chatTabidentifier: "chatTabidentifier", _gameType: ["gameType", "_gameType"], _sendFrom: ["sendFrom", "_sendFrom"], _sendTo: ["sendTo", "_sendTo"], _text: ["text", "_text"], _selectNum: ["selectNum", "_selectNum"] }, outputs: { gameTypeChange: "gameTypeChange", sendFromChange: "sendFromChange", sendToChange: "sendToChange", textChange: "textChange", chat: "chat", allBox: "allBox", hideChkEvent: "hideChkEvent" }, decls: 41, vars: 33, consts: [[1, "table", 3, "ngClass"], [1, "table"], [1, "table-cell", "imagebox"], ["class", "image", 3, "src", 4, "ngIf"], [1, "table-cell"], [1, "ud-select", 2, "width", "10em", 3, "ngModel", "searchable", "clearable", "ngModelChange"], [3, "value", 4, "ngIf"], [3, "value", 4, "ngFor", "ngForOf"], [1, "color", 3, "ngStyle", "click"], [1, "color-setting", "small-font", 3, "click"], [1, "material-icons", "small-font"], [2, "font-size", "0.8em", "text-align", "right"], [1, "color-setting", "small-font", 2, "width", "7em", 3, "click"], [4, "ngIf"], [1, "tachie-tag"], [2, "width", "100%"], [2, "float", "right", "text-align", "right"], ["name", "buff_hide_chk", "type", "checkbox", 3, "change"], [3, "hidden"], ["placeholder", "Enter\u3067\u9001\u4FE1", 1, "controller-input", 3, "ngModel", "ngModelOptions", "ngModelChange", "input", "keydown.enter"], ["textArea", ""], ["type", "submit", 3, "click"], [1, "image", 3, "src"], [3, "value"], ["type", "range", "min", "0", "max", "0", 3, "ngModel", "ngModelChange"], ["type", "range", "min", "0", 3, "max", "ngModel", "ngModelChange"]], template: function ControllerInputComponent_Template(rf, ctx) { if (rf & 1) {
+        } }, inputs: { onlyCharacters: "onlyCharacters", chatTabidentifier: "chatTabidentifier", _gameType: ["gameType", "_gameType"], _sendFrom: ["sendFrom", "_sendFrom"], _sendTo: ["sendTo", "_sendTo"], _text: ["text", "_text"], _selectNum: ["selectNum", "_selectNum"] }, outputs: { gameTypeChange: "gameTypeChange", sendFromChange: "sendFromChange", sendToChange: "sendToChange", textChange: "textChange", chat: "chat", allBox: "allBox", hideChkEvent: "hideChkEvent" }, decls: 41, vars: 33, consts: [[1, "table", 3, "ngClass"], [1, "table"], [1, "table-cell", "imagebox"], ["class", "image", 3, "src", 4, "ngIf"], [1, "table-cell"], [1, "ud-select", 2, "width", "10em", 3, "ngModel", "searchable", "clearable", "ngModelChange"], [3, "value", 4, "ngIf"], [3, "value", 4, "ngFor", "ngForOf"], [1, "color", 3, "ngStyle", "click"], [1, "color-setting", "small-font", 3, "click"], [1, "material-icons", "small-font"], [2, "font-size", "0.8em", "text-align", "right"], [1, "color-setting", "small-font", 2, "width", "7em", 3, "click"], [4, "ngIf"], [1, "tachie-tag"], [2, "width", "100%"], [2, "float", "right", "text-align", "right"], ["name", "buff_hide_chk", "type", "checkbox", 3, "change"], [3, "hidden"], ["placeholder", "\u6309Enter\u9001\u51FA", 1, "controller-input", 3, "ngModel", "ngModelOptions", "ngModelChange", "input", "keydown.enter"], ["textArea", ""], ["type", "submit", 3, "click"], [1, "image", 3, "src"], [3, "value"], ["type", "range", "min", "0", "max", "0", 3, "ngModel", "ngModelChange"], ["type", "range", "min", "0", 3, "max", "ngModel", "ngModelChange"]], template: function ControllerInputComponent_Template(rf, ctx) { if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0);
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "div", 1);
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "div", 2);
@@ -26539,7 +26539,7 @@ var ControllerInputComponent = /** @class */ (function () {
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](29, "hr");
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](30, "div", 15);
-            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](31, "\u30D0\u30D5/\u30C7\u30D0\u30C3\u30D5\u30A1\u30FC ");
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](31, "BUFF/DEBUFF ");
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](32, "div", 16);
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](33, "\u96B1\u85CF ");
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](34, "input", 17);
@@ -29943,7 +29943,7 @@ var ChatPaletteComponent = /** @class */ (function () {
             this.toggleEditMode();
     };
     ChatPaletteComponent.prototype.updatePanelTitle = function () {
-        this.panelService.title = this.character.name + ' のチャットパレット';
+        this.panelService.title = this.character.name + ' 的對話組合版';
     };
     ChatPaletteComponent.prototype.onSelectedCharacter = function (identifier) {
         if (this.isEdit)
@@ -30025,7 +30025,7 @@ var ChatPaletteComponent = /** @class */ (function () {
             var _t = void 0;
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵloadQuery"]()) && (ctx.chatInputComponent = _t.first);
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵloadQuery"]()) && (ctx.chatPaletteElementRef = _t.first);
-        } }, inputs: { character: "character" }, decls: 14, vars: 11, consts: [[1, "flex-container"], [2, "flex-grow", "0"], [1, "chat-tab"], [4, "ngFor", "ngForOf"], [3, "onlyCharacters", "chatTabidentifier", "gameType", "sendFrom", "text", "gameTypeChange", "sendFromChange", "textChange", "chat", "tabSwitch"], ["chatInput", ""], ["class", "edit-info", 4, "ngIf"], ["style", "flex-grow: 1; height: 0; min-height: 100px;", 4, "ngIf"], ["type", "submit", 3, "click"], [4, "ngIf"], ["name", "chat-tab", "type", "radio", "ng-control", "options", 3, "value", "ngModel", "ngModelChange"], ["class", "badge", 3, "count", 4, "ngIf"], [1, "badge", 3, "count"], [1, "edit-info"], [1, "material-icons", 2, "vertical-align", "bottom", "size", "0.8rem"], [2, "flex-grow", "1", "height", "0", "min-height", "100px"], ["size", "5", 1, "palette", 2, "overflow-y", "auto", 3, "input", "click", "focusout"], ["chatPalette", ""], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], ["placeholder", "\u30C1\u30E3\u30C3\u30C8\u30D1\u30EC\u30C3\u30C8", 1, "palette", 2, "resize", "none", 3, "ngModel", "ngModelChange"]], template: function ChatPaletteComponent_Template(rf, ctx) { if (rf & 1) {
+        } }, inputs: { character: "character" }, decls: 14, vars: 11, consts: [[1, "flex-container"], [2, "flex-grow", "0"], [1, "chat-tab"], [4, "ngFor", "ngForOf"], [3, "onlyCharacters", "chatTabidentifier", "gameType", "sendFrom", "text", "gameTypeChange", "sendFromChange", "textChange", "chat", "tabSwitch"], ["chatInput", ""], ["class", "edit-info", 4, "ngIf"], ["style", "flex-grow: 1; height: 0; min-height: 100px;", 4, "ngIf"], ["type", "submit", 3, "click"], [4, "ngIf"], ["name", "chat-tab", "type", "radio", "ng-control", "options", 3, "value", "ngModel", "ngModelChange"], ["class", "badge", 3, "count", 4, "ngIf"], [1, "badge", 3, "count"], [1, "edit-info"], [1, "material-icons", 2, "vertical-align", "bottom", "size", "0.8rem"], [2, "flex-grow", "1", "height", "0", "min-height", "100px"], ["size", "5", 1, "palette", 2, "overflow-y", "auto", 3, "input", "click", "focusout"], ["chatPalette", ""], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], ["placeholder", "\u5C0D\u8A71\u7D44\u5408\u7248", 1, "palette", 2, "resize", "none", 3, "ngModel", "ngModelChange"]], template: function ChatPaletteComponent_Template(rf, ctx) { if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "form");
@@ -30996,14 +30996,14 @@ function CardStackListComponent_div_4_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "div", 5);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "button", 6);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function CardStackListComponent_div_4_Template_button_click_7_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r3); var card_r1 = ctx.$implicit; var ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r2.drawCard(card_r1); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, "\u5C71\u672D\u304B\u3089\u51FA\u3059");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, "\u62BD\u724C");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "button", 0);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function CardStackListComponent_div_4_Template_button_click_9_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r3); var card_r1 = ctx.$implicit; var ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r4.showDetail(card_r1); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "i", 7);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](11, "settings");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](12, "\u7DE8\u96C6");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](12, "\u7DE8\u8F2F");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](13, "br");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "button", 0);
@@ -31035,7 +31035,7 @@ var CardStackListComponent = /** @class */ (function () {
     }
     CardStackListComponent.prototype.ngOnInit = function () {
         var _this = this;
-        Promise.resolve().then(function () { return _this.panelService.title = _this.cardStack.name + ' のカード一覧'; });
+        Promise.resolve().then(function () { return _this.panelService.title = _this.cardStack.name + ' 卡牌列表'; });
         _udonarium_core_system__WEBPACK_IMPORTED_MODULE_3__["EventSystem"].register(this)
             .on('UPDATE_GAME_OBJECT', -1000, function (event) {
             var object = _udonarium_core_synchronize_object_object_store__WEBPACK_IMPORTED_MODULE_2__["ObjectStore"].instance.get(event.data.identifier);
@@ -31102,7 +31102,7 @@ var CardStackListComponent = /** @class */ (function () {
             x: this.panelService.left,
             y: this.panelService.top
         };
-        var title = 'カード設定';
+        var title = '卡牌設定';
         if (gameObject.name.length)
             title += ' - ' + gameObject.name;
         var option = { title: title, left: coordinate.x + 10, top: coordinate.y + 20, width: 600, height: 600 };
@@ -31117,7 +31117,7 @@ var CardStackListComponent = /** @class */ (function () {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "button", 0);
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function CardStackListComponent_Template_button_click_1_listener() { return ctx.close(true); });
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "\u30B7\u30E3\u30C3\u30D5\u30EB\u3057\u3066\u30A6\u30A3\u30F3\u30C9\u30A6\u3092\u9589\u3058\u308B");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "\u96A8\u6A5F\u6D17\u724C\u4E26\u95DC\u9589\u7A97\u53E3");
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "hr");
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, CardStackListComponent_div_4_Template, 19, 11, "div", 1);
@@ -32923,7 +32923,7 @@ function CardStackComponent_div_4_Template(rf, ctx) { if (rf & 1) {
     var ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngStyle", _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpureFunction1"](2, _c0, "translateY(-50%) translateX(-50%) translateX(" + ctx_r2.size * ctx_r2.gridSize / 2 + "px)"));
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate1"]("", ctx_r2.cards.length, "\u679A");
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate1"]("", ctx_r2.cards.length, "\u5F35");
 } }
 function CardStackComponent_div_5_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 12);
@@ -32935,7 +32935,7 @@ function CardStackComponent_div_5_Template(rf, ctx) { if (rf & 1) {
     var ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngStyle", _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpureFunction1"](2, _c0, "translateY(50%) translateX(-50%) translateX(" + ctx_r3.size * ctx_r3.gridSize / 2 + "px)"));
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate1"]("", ctx_r3.ownerName, " \u304C\u78BA\u8A8D\u4E2D");
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate1"]("", ctx_r3.ownerName, " \u78BA\u8A8D\u4E2D");
 } }
 var _c1 = function (a0) { return { "is-empty": a0 }; };
 var CardStackComponent = /** @class */ (function () {
@@ -33151,7 +33151,7 @@ var CardStackComponent = /** @class */ (function () {
         var position = this.pointerDeviceService.pointers[0];
         this.contextMenuService.open(position, [
             {
-                name: '１枚引く',
+                name: '抽一張',
                 action: function () {
                     if (_this.drawCard() != null) {
                         _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_9__["SoundEffect"].play(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_9__["PresetSound"].cardDraw);
@@ -33160,14 +33160,14 @@ var CardStackComponent = /** @class */ (function () {
             },
             service_context_menu_service__WEBPACK_IMPORTED_MODULE_13__["ContextMenuSeparator"],
             {
-                name: '一番上を表にする',
+                name: '表面顯示第一張',
                 action: function () {
                     _this.cardStack.faceUp();
                     _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_9__["SoundEffect"].play(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_9__["PresetSound"].cardDraw);
                 }
             },
             {
-                name: '一番上を裏にする',
+                name: '背面顯示第一張',
                 action: function () {
                     _this.cardStack.faceDown();
                     _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_9__["SoundEffect"].play(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_9__["PresetSound"].cardDraw);
@@ -33175,21 +33175,21 @@ var CardStackComponent = /** @class */ (function () {
             },
             service_context_menu_service__WEBPACK_IMPORTED_MODULE_13__["ContextMenuSeparator"],
             {
-                name: 'すべて表にする',
+                name: '表面顯示整副',
                 action: function () {
                     _this.cardStack.faceUpAll();
                     _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_9__["SoundEffect"].play(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_9__["PresetSound"].cardDraw);
                 }
             },
             {
-                name: 'すべて裏にする',
+                name: '背面顯示整副',
                 action: function () {
                     _this.cardStack.faceDownAll();
                     _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_9__["SoundEffect"].play(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_9__["PresetSound"].cardDraw);
                 }
             },
             {
-                name: 'すべて正位置にする',
+                name: '放正位置',
                 action: function () {
                     _this.cardStack.uprightAll();
                     _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_9__["SoundEffect"].play(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_9__["PresetSound"].cardDraw);
@@ -33197,39 +33197,39 @@ var CardStackComponent = /** @class */ (function () {
             },
             service_context_menu_service__WEBPACK_IMPORTED_MODULE_13__["ContextMenuSeparator"],
             {
-                name: 'シャッフル',
+                name: '洗牌',
                 action: function () {
                     _this.cardStack.shuffle();
                     _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_9__["SoundEffect"].play(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_9__["PresetSound"].cardShuffle);
                     _udonarium_core_system__WEBPACK_IMPORTED_MODULE_7__["EventSystem"].call('SHUFFLE_CARD_STACK', { identifier: _this.cardStack.identifier });
                 }
             },
-            { name: 'カード一覧', action: function () { _this.showStackList(_this.cardStack); } },
+            { name: '卡牌列表', action: function () { _this.showStackList(_this.cardStack); } },
             service_context_menu_service__WEBPACK_IMPORTED_MODULE_13__["ContextMenuSeparator"],
             (this.isShowTotal
-                ? { name: '枚数を非表示にする', action: function () { _this.cardStack.isShowTotal = false; } }
-                : { name: '枚数を表示する', action: function () { _this.cardStack.isShowTotal = true; } }),
-            { name: 'カードサイズを揃える', action: function () { if (_this.cardStack.topCard)
+                ? { name: '不顯示數量', action: function () { _this.cardStack.isShowTotal = false; } }
+                : { name: '顯示數量', action: function () { _this.cardStack.isShowTotal = true; } }),
+            { name: '對齊格線', action: function () { if (_this.cardStack.topCard)
                     _this.cardStack.unifyCardsSize(_this.cardStack.topCard.size); } },
             service_context_menu_service__WEBPACK_IMPORTED_MODULE_13__["ContextMenuSeparator"],
             {
-                name: '山札を人数分に分割する',
+                name: '按人數分發卡牌',
                 action: function () {
                     _this.splitStack(_udonarium_core_system__WEBPACK_IMPORTED_MODULE_7__["Network"].peerIds.length);
                     _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_9__["SoundEffect"].play(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_9__["PresetSound"].cardDraw);
                 }
             },
             {
-                name: '山札を崩す',
+                name: '打散牌堆',
                 action: function () {
                     _this.breakStack();
                     _udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_9__["SoundEffect"].play(_udonarium_sound_effect__WEBPACK_IMPORTED_MODULE_9__["PresetSound"].cardShuffle);
                 }
             },
             service_context_menu_service__WEBPACK_IMPORTED_MODULE_13__["ContextMenuSeparator"],
-            { name: '詳細を表示', action: function () { _this.showDetail(_this.cardStack); } },
+            { name: '顯示詳細', action: function () { _this.showDetail(_this.cardStack); } },
             {
-                name: 'コピーを作る',
+                name: '製作副本',
                 action: function () {
                     var cloneObject = _this.cardStack.clone();
                     cloneObject.location.x += _this.gridSize;
@@ -33240,7 +33240,7 @@ var CardStackComponent = /** @class */ (function () {
                 }
             },
             {
-                name: '山札を削除する',
+                name: '刪除牌堆',
                 action: function () {
                     _this.cardStack.setLocation('graveyard');
                     _this.cardStack.destroy();
@@ -33358,7 +33358,7 @@ var CardStackComponent = /** @class */ (function () {
     CardStackComponent.prototype.showDetail = function (gameObject) {
         _udonarium_core_system__WEBPACK_IMPORTED_MODULE_7__["EventSystem"].trigger('SELECT_TABLETOP_OBJECT', { identifier: gameObject.identifier, className: gameObject.aliasName });
         var coordinate = this.pointerDeviceService.pointers[0];
-        var title = '山札設定';
+        var title = '牌堆設定';
         if (gameObject.name.length)
             title += ' - ' + gameObject.name;
         var option = { title: title, left: coordinate.x - 300, top: coordinate.y - 300, width: 600, height: 600 };
@@ -35085,11 +35085,11 @@ var ChatWindowComponent = /** @class */ (function () {
     };
     ChatWindowComponent.prototype.updatePanelTitle = function () {
         if (this.chatTab) {
-            this.panelService.title = 'チャットウィンドウ - ' + this.chatTab.name;
+            this.panelService.title = '聊天視窗 - ' + this.chatTab.name;
             this.panelService.chatTab = this.chatTab;
         }
         else {
-            this.panelService.title = 'チャットウィンドウ';
+            this.panelService.title = '聊天視窗';
             this.panelService.chatTab = null;
         }
     };
@@ -36013,7 +36013,7 @@ var CutInWindowComponent = /** @class */ (function () {
         var _this = this;
         _udonarium_core_system__WEBPACK_IMPORTED_MODULE_4__["EventSystem"].register(this)
             .on('START_CUT_IN', function (event) {
-            console.log('カットインウィンドウ>Event:START_CUT_IN ' + _this.cutIn.name);
+            console.log('CutIn視窗>Event:START_CUT_IN ' + _this.cutIn.name);
             if (_this.cutIn) {
                 if (_this.cutIn.identifier == event.data.cutIn.identifier || _this.cutIn.tagName == event.data.cutIn.tagName) {
                     _this.panelService.close();
@@ -36030,7 +36030,7 @@ var CutInWindowComponent = /** @class */ (function () {
             }
         })
             .on('STOP_CUT_IN', function (event) {
-            console.log('カットインウィンドウ>Event: ' + _this.cutIn.name);
+            console.log('CutIn視窗>Event: ' + _this.cutIn.name);
             if (_this.cutIn) {
                 if (_this.cutIn.identifier == event.data.cutIn.identifier) {
                     _this.panelService.close();
@@ -36064,7 +36064,7 @@ var CutInWindowComponent = /** @class */ (function () {
             this.top = margin_y;
         }
         else {
-            console.log("カットインが未定義で再生された");
+            console.log("CutIn未定義");
         }
         this.panelService.width = this.width;
         this.panelService.height = this.height;
@@ -36432,7 +36432,7 @@ function ChatTabSettingComponent_ng_container_8_ng_container_8_Template(rf, ctx)
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](6, "br");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](7, "button", 16);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function ChatTabSettingComponent_ng_container_8_ng_container_8_Template_button_click_7_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r17); var ctx_r18 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](2); return ctx_r18.saveAllLog(); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](8, "\u4FDD\u5B58\u5168\u5206\u9801\u804A\u5929\u7D00\u9304");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](8, "\u4FDD\u5B58\u6240\u6709\u5206\u9801\u7684\u804A\u5929\u7D00\u9304");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](9, "span", 17);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](10, "\u6309\u6642\u9593\u9806\u5E8F\u5C07\u6240\u6709\u5167\u5BB9\u4E00\u8D77\u4FDD\u5B58");
@@ -36449,11 +36449,11 @@ function ChatTabSettingComponent_ng_container_8_ng_container_12_Template(rf, ctx
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](3, "br");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](4, "button", 19);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function ChatTabSettingComponent_ng_container_8_ng_container_12_Template_button_click_4_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r20); var ctx_r21 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](2); return ctx_r21.deleteLog(); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](5, "\u6E05\u9664\u9078\u64C7\u804A\u5929\u7D00\u9304");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](5, "\u6E05\u9664\u9078\u64C7\u7D00\u9304");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](6, "button", 19);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function ChatTabSettingComponent_ng_container_8_ng_container_12_Template_button_click_6_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r20); var ctx_r22 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](2); return ctx_r22.deleteLogALL(); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](7, "\u6E05\u9664\u6240\u6709\u804A\u5929\u7D00\u9304");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](7, "\u6E05\u9664\u6240\u6709\u7D00\u9304");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementContainerEnd"]();
 } if (rf & 2) {
@@ -36547,7 +36547,7 @@ var ChatTabSettingComponent = /** @class */ (function () {
     });
     ChatTabSettingComponent.prototype.ngOnInit = function () {
         var _this = this;
-        Promise.resolve().then(function () { return _this.modalService.title = _this.panelService.title = 'チャットタブ設定'; });
+        Promise.resolve().then(function () { return _this.modalService.title = _this.panelService.title = '聊天分頁設定'; });
         _udonarium_core_system__WEBPACK_IMPORTED_MODULE_5__["EventSystem"].register(this)
             .on('DELETE_GAME_OBJECT', 1000, function (event) {
             if (!_this.selectedTab || event.data.identifier !== _this.selectedTab.identifier)
@@ -36566,7 +36566,7 @@ var ChatTabSettingComponent = /** @class */ (function () {
         this.selectedTabXml = '';
     };
     ChatTabSettingComponent.prototype.create = function () {
-        _udonarium_chat_tab_list__WEBPACK_IMPORTED_MODULE_2__["ChatTabList"].instance.addChatTab('タブ');
+        _udonarium_chat_tab_list__WEBPACK_IMPORTED_MODULE_2__["ChatTabList"].instance.addChatTab('分頁');
     };
     ChatTabSettingComponent.prototype.save = function () {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
@@ -36598,7 +36598,7 @@ var ChatTabSettingComponent = /** @class */ (function () {
         get: function () {
             var roomName = _udonarium_core_system__WEBPACK_IMPORTED_MODULE_5__["Network"].peerContext && 0 < _udonarium_core_system__WEBPACK_IMPORTED_MODULE_5__["Network"].peerContext.roomName.length
                 ? _udonarium_core_system__WEBPACK_IMPORTED_MODULE_5__["Network"].peerContext.roomName
-                : 'ルームデータ';
+                : '房間數據';
             return roomName;
         },
         enumerable: false,
@@ -36621,7 +36621,7 @@ var ChatTabSettingComponent = /** @class */ (function () {
         this.saveDataService.saveHtmlChatLog(this.selectedTab, fileName_);
     };
     ChatTabSettingComponent.prototype.saveAllLog = function () {
-        var fileName = this.roomName + '_log_' + '全タブ';
+        var fileName = this.roomName + '_log_' + '全分頁';
         var fileName_ = this.appendTimestamp(fileName);
         this.saveDataService.saveHtmlChatLogAll(fileName_);
     };
@@ -36644,7 +36644,7 @@ var ChatTabSettingComponent = /** @class */ (function () {
                 this.selectedTab.children[0].destroy();
             this.selectedTab.tachieReset();
         }
-        var mess = 'ログをクリアしました';
+        var mess = '已清除紀錄';
         var gameSystem = null;
         var sendTo = '';
         this.chatMessageService.sendMessage(this.selectedTab, mess, gameSystem, this.myPeer.identifier, sendTo, 0, '#000000');
@@ -36653,7 +36653,7 @@ var ChatTabSettingComponent = /** @class */ (function () {
         var e_1, _a;
         if (!this.allowDeleteLog)
             return;
-        var mess = 'ログをクリアしました';
+        var mess = '已清除紀錄';
         var gameSystem = null;
         var sendTo = '';
         try {
